@@ -18,24 +18,24 @@ package GL.API.Singles is
    use GL.Types.Singles;
 
    procedure Vertex_Attrib1 is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib1f", Attributes.Attribute, Single);
+     (GL_Vertex_Attrib_1f, Attributes.Attribute, Single);
 
    procedure Vertex_Attrib2 is new Loader.Procedure_With_3_Params
-     ("glVertexAttrib2f", Attributes.Attribute, Single, Single);
+     (GL_Vertex_Attrib_2f, Attributes.Attribute, Single, Single);
 
    procedure Vertex_Attrib2v is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib2fv", Attributes.Attribute, Vector2);
+     (GL_Vertex_Attrib_2fv, Attributes.Attribute, Vector2);
 
    procedure Vertex_Attrib3 is new Loader.Procedure_With_4_Params
-     ("glVertexAttrib3f", Attributes.Attribute, Single, Single, Single);
+     (GL_Vertex_Attrib_3f, Attributes.Attribute, Single, Single, Single);
 
    procedure Vertex_Attrib3v is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib3fv", Attributes.Attribute, Vector3);
+     (GL_Vertex_Attrib_3fv, Attributes.Attribute, Vector3);
 
    procedure Vertex_Attrib4 is new Loader.Procedure_With_5_Params
-     ("glVertexAttrib4f", Attributes.Attribute, Single, Single, Single, Single);
+     (GL_Vertex_Attrib_4f, Attributes.Attribute, Single, Single, Single, Single);
 
    procedure Vertex_Attrib4v is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib4fv", Attributes.Attribute, Vector4);
+     (GL_Vertex_Attrib_4fv, Attributes.Attribute, Vector4);
 
 end GL.API.Singles;

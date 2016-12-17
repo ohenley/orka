@@ -19,9 +19,12 @@ with System;
 
 with GL.API;
 with GL.Enums;
+with GL.Functions;
 
 package body GL.Objects.Buffers is
+
    use type Low_Level.Enums.Buffer_Kind;
+   use GL.Functions;
 
    package Buffer_Holder is new Ada.Containers.Indefinite_Holders
      (Element_Type => Buffer'Class);
@@ -221,7 +224,7 @@ package body GL.Objects.Buffers is
       procedure Map (Object : in out Buffer; Access_Type : Access_Kind;
                      Pointer : out Pointers.Pointer) is
          function Map_Named_Buffer is new API.Loader.Function_With_2_Params
-           ("glMapNamedBuffer", UInt, Access_Kind,
+           (GL_Map_Named_Buffer, UInt, Access_Kind,
             Pointers.Pointer);
       begin
          Pointer := Map_Named_Buffer (Object.Reference.GL_Id, Access_Type);
@@ -239,7 +242,7 @@ package body GL.Objects.Buffers is
            Convert (Access_Flags) and 2#0000000011111111#;
 
          function Map_Named_Buffer_Range is new API.Loader.Function_With_4_Params
-           ("glMapNamedBufferRange", UInt, Low_Level.IntPtr, Low_Level.SizeIPtr, Low_Level.Bitfield,
+           (GL_Map_Named_Buffer_Range, UInt, Low_Level.IntPtr, Low_Level.SizeIPtr, Low_Level.Bitfield,
             Pointers.Pointer);
 
          Offset_In_Bytes : constant Int := Offset * Pointers.Element'Size / System.Storage_Unit;
@@ -277,7 +280,7 @@ package body GL.Objects.Buffers is
 
       function Pointer (Object : Buffer) return Pointers.Pointer is
          procedure Named_Buffer_Pointer is new API.Loader.Getter_With_3_Params
-           ("glGetNamedBufferPointerv", UInt,
+           (GL_Get_Named_Buffer_Pointerv, UInt,
             Enums.Buffer_Pointer_Param, Pointers.Pointer);
          Ret : Pointers.Pointer := null;
       begin
@@ -300,7 +303,7 @@ package body GL.Objects.Buffers is
                               Offset : Types.Size;
                               Data   : out Pointers.Element_Array) is
          procedure Get_Named_Buffer_Sub_Data is new API.Loader.Getter_With_4_Params
-           ("glGetNamedBufferSubData", UInt, Low_Level.IntPtr,
+           (GL_Get_Named_Buffer_Sub_Data, UInt, Low_Level.IntPtr,
             Low_Level.SizeIPtr, Pointers.Element_Array);
 
          Number_Of_Bytes : constant Long := Data'Length * Pointers.Element'Size / System.Storage_Unit;

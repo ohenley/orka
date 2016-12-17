@@ -20,24 +20,24 @@ package GL.API.Shorts is
    use GL.Types.Shorts;
    
    procedure Vertex_Attrib1 is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib1s", Attributes.Attribute, Short);
+     (GL_Vertex_Attrib_1s, Attributes.Attribute, Short);
    
    procedure Vertex_Attrib2 is new Loader.Procedure_With_3_Params
-     ("glVertexAttrib2s", Attributes.Attribute, Short, Short);
+     (GL_Vertex_Attrib_2s, Attributes.Attribute, Short, Short);
    
    procedure Vertex_Attrib2v is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib2sv", Attributes.Attribute, Vector2);
+     (GL_Vertex_Attrib_2sv, Attributes.Attribute, Vector2);
    
    procedure Vertex_Attrib3 is new Loader.Procedure_With_4_Params
-     ("glVertexAttrib3s", Attributes.Attribute, Short, Short, Short);
+     (GL_Vertex_Attrib_3s, Attributes.Attribute, Short, Short, Short);
    
    procedure Vertex_Attrib3v is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib3sv", Attributes.Attribute, Vector3);
+     (GL_Vertex_Attrib_3sv, Attributes.Attribute, Vector3);
    
    procedure Vertex_Attrib4 is new Loader.Procedure_With_5_Params
-     ("glVertexAttrib4s", Attributes.Attribute, Short, Short, Short, Short);
+     (GL_Vertex_Attrib_4s, Attributes.Attribute, Short, Short, Short, Short);
    
    procedure Vertex_Attrib4v is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib4sv", Attributes.Attribute, Vector4);
+     (GL_Vertex_Attrib_4sv, Attributes.Attribute, Vector4);
    
 end GL.API.Shorts;

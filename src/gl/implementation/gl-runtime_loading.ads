@@ -12,17 +12,17 @@
 --  See the License for the specific language governing permissions and
 --  limitations under the License.
 
-with Ada.Containers.Indefinite_Hashed_Maps;
-with Ada.Strings.Hash;
-
 with System;
 
+with GL.Functions;
 with GL.Types;
 
 private generic
    with function Raw_Subprogram_Reference (Name : String) return System.Address;
 package GL.Runtime_Loading is
    pragma Preelaborate;
+
+   use GL.Functions;
 
    -- This package loads raw API functions at runtime (meaning it requests
    -- the function pointer of the requested function at runtime).
@@ -34,20 +34,20 @@ package GL.Runtime_Loading is
    -- a feature is supported is by using the GL.Context package.
 
    generic
-      Function_Name : String;
+      Function_ID : Reference_ID;
       type Return_Type is private;
    function Function_Without_Params return Return_Type;
    pragma Inline (Function_Without_Params);
 
    generic
-      Function_Name : String;
+      Function_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Return_Type is private;
    function Function_With_1_Param (Param1 : Param1_Type) return Return_Type;
    pragma Inline (Function_With_1_Param);
 
    generic
-      Function_Name : String;
+      Function_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Return_Type is private;
@@ -57,7 +57,7 @@ package GL.Runtime_Loading is
    pragma Inline (Function_With_2_Params);
 
    generic
-      Function_Name : String;
+      Function_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -69,7 +69,7 @@ package GL.Runtime_Loading is
    pragma Inline (Function_With_3_Params);
 
    generic
-      Function_Name : String;
+      Function_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -83,7 +83,7 @@ package GL.Runtime_Loading is
    pragma Inline (Function_With_4_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Element_Type is private;
       type Array_Type is array (Types.Size range <>) of Element_Type;
@@ -93,7 +93,7 @@ package GL.Runtime_Loading is
    pragma Inline (Array_Getter_With_4_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -111,18 +111,18 @@ package GL.Runtime_Loading is
    pragma Inline (Array_Getter_With_8_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
    procedure Procedure_Without_Params;
    pragma Inline (Procedure_Without_Params);
    
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
    procedure Procedure_With_1_Param (Param1 : Param1_Type);
    pragma Inline (Procedure_With_1_Param);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
    procedure Procedure_With_2_Params (Param1 : Param1_Type;
@@ -130,7 +130,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_2_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -140,7 +140,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_3_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -152,7 +152,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_4_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -166,7 +166,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_5_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -182,7 +182,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_6_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -200,7 +200,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_7_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -220,7 +220,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_8_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -242,7 +242,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_9_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -266,7 +266,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_10_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -292,7 +292,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_11_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Param2_Type (<>) is private;
       type Param3_Type (<>) is private;
@@ -320,7 +320,7 @@ package GL.Runtime_Loading is
    pragma Inline (Procedure_With_12_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type is private;
       type Value_Type  (<>) is private;
    procedure Getter_With_2_Params (Param1 : Param1_Type;
@@ -328,7 +328,7 @@ package GL.Runtime_Loading is
    pragma Inline (Getter_With_2_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type is private;
       type Param2_Type is private;
       type Value_Type  (<>) is private;
@@ -338,7 +338,7 @@ package GL.Runtime_Loading is
    pragma Inline (Getter_With_3_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type is private;
       type Param2_Type is private;
       type Param3_Type is private;
@@ -350,7 +350,7 @@ package GL.Runtime_Loading is
    pragma Inline (Getter_With_4_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Size_Type is (<>);
       type Element_Type is private;
       type Array_Type is array (Positive range <>) of Element_Type;
@@ -359,7 +359,7 @@ package GL.Runtime_Loading is
    pragma Inline (Array_Proc_With_2_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Param1_Type (<>) is private;
       type Size_Type is (<>);
       type Element_Type is private;
@@ -370,7 +370,7 @@ package GL.Runtime_Loading is
    pragma Inline (Array_Proc_With_3_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Size_Type is (<>);
       type Param1_Type is private;
    procedure String_Getter_With_4_Params (Param1      : Param1_Type;
@@ -380,7 +380,7 @@ package GL.Runtime_Loading is
    pragma Inline (String_Getter_With_4_Params);
 
    generic
-      Procedure_Name : String;
+      Procedure_ID : Reference_ID;
       type Size_Type is (<>);
       type Param1_Type is private;
       type Param2_Type is private;
@@ -393,20 +393,15 @@ package GL.Runtime_Loading is
                                           Value       : in out String);
    pragma Inline (String_Getter_With_6_Params);
 
+   procedure Initialize;
+
 private
 
    generic
       type Function_Reference is private;
-   function Load (Function_Name : String) return Function_Reference;
-   pragma Inline (Load);
+   function Load (ID : Reference_ID) return Function_Reference
+     with Inline;
 
-   package Function_Maps is new Ada.Containers.Indefinite_Hashed_Maps
-     (Key_Type        => String,
-      Element_Type    => System.Address,
-      Hash            => Ada.Strings.Hash,
-      Equivalent_Keys => Standard."=",
-      "="             => System."=");
-
-   Loaded : Function_Maps.Map;
+   Loaded : array (Reference_ID) of System.Address;
 
 end GL.Runtime_Loading;

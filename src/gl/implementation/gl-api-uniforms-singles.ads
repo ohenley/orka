@@ -18,39 +18,39 @@ package GL.API.Uniforms.Singles is
    use GL.Types.Singles;
 
    procedure Uniform1 is new Loader.Procedure_With_3_Params
-     ("glProgramUniform1f", UInt, Int, Single);
+     (GL_Program_Uniform_1f, UInt, Int, Single);
 
    procedure Uniform1v is new Loader.Procedure_With_4_Params
-     ("glProgramUniform1fv", UInt, Int, Size, Single_Array);
+     (GL_Program_Uniform_1fv, UInt, Int, Size, Single_Array);
 
    procedure Uniform2 is new Loader.Procedure_With_4_Params
-     ("glProgramUniform2f", UInt, Int, Single, Single);
+     (GL_Program_Uniform_2f, UInt, Int, Single, Single);
 
    procedure Uniform2v is new Loader.Procedure_With_4_Params
-     ("glProgramUniform2fv", UInt, Int, Size, Vector2_Array);
+     (GL_Program_Uniform_2fv, UInt, Int, Size, Vector2_Array);
 
    procedure Uniform3 is new Loader.Procedure_With_5_Params
-     ("glProgramUniform3f", UInt, Int, Single, Single, Single);
+     (GL_Program_Uniform_3f, UInt, Int, Single, Single, Single);
 
    procedure Uniform3v is new Loader.Procedure_With_4_Params
-     ("glProgramUniform3fv", UInt, Int, Size, Vector3_Array);
+     (GL_Program_Uniform_3fv, UInt, Int, Size, Vector3_Array);
 
    procedure Uniform4 is new Loader.Procedure_With_6_Params
-     ("glProgramUniform4f", UInt, Int, Single, Single, Single, Single);
+     (GL_Program_Uniform_4f, UInt, Int, Single, Single, Single, Single);
 
    procedure Uniform4v is new Loader.Procedure_With_4_Params
-     ("glProgramUniform4fv", UInt, Int, Size, Vector4_Array);    
+     (GL_Program_Uniform_4fv, UInt, Int, Size, Vector4_Array);
 
    procedure Uniform_Matrix2 is new Loader.Procedure_With_5_Params
-     ("glProgramUniformMatrix2fv", UInt, Int, Size, Low_Level.Bool,
+     (GL_Program_Uniform_Matrix2fv, UInt, Int, Size, Low_Level.Bool,
       Matrix2_Array);
 
    procedure Uniform_Matrix3 is new Loader.Procedure_With_5_Params
-     ("glProgramUniformMatrix3fv", UInt, Int, Size, Low_Level.Bool,
+     (GL_Program_Uniform_Matrix3fv, UInt, Int, Size, Low_Level.Bool,
       Matrix3_Array);
 
    procedure Uniform_Matrix4 is new Loader.Procedure_With_5_Params
-     ("glProgramUniformMatrix4fv", UInt, Int, Size, Low_Level.Bool,
+     (GL_Program_Uniform_Matrix4fv, UInt, Int, Size, Low_Level.Bool,
       Matrix4_Array);
 
 end GL.API.Uniforms.Singles;

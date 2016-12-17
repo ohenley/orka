@@ -18,24 +18,24 @@ package GL.API.Ints is
    use GL.Types.Ints;
 
    procedure Vertex_Attrib1 is new Loader.Procedure_With_2_Params
-     ("glVertexAttribI1i", Attributes.Attribute, Int);
+     (GL_Vertex_Attrib_I1i, Attributes.Attribute, Int);
 
    procedure Vertex_Attrib2 is new Loader.Procedure_With_3_Params
-     ("glVertexAttribI2i", Attributes.Attribute, Int, Int);
+     (GL_Vertex_Attrib_I2i, Attributes.Attribute, Int, Int);
 
    procedure Vertex_Attrib2v is new Loader.Procedure_With_2_Params
-     ("glVertexAttribI2iv", Attributes.Attribute, Vector2);
+     (GL_Vertex_Attrib_I2iv, Attributes.Attribute, Vector2);
 
    procedure Vertex_Attrib3 is new Loader.Procedure_With_4_Params
-     ("glVertexAttribI3i", Attributes.Attribute, Int, Int, Int);
+     (GL_Vertex_Attrib_I3i, Attributes.Attribute, Int, Int, Int);
 
    procedure Vertex_Attrib3v is new Loader.Procedure_With_2_Params
-     ("glVertexAttribI3iv", Attributes.Attribute, Vector3);
+     (GL_Vertex_Attrib_I3iv, Attributes.Attribute, Vector3);
 
    procedure Vertex_Attrib4 is new Loader.Procedure_With_5_Params
-     ("glVertexAttribI4i", Attributes.Attribute, Int, Int, Int, Int);
+     (GL_Vertex_Attrib_I4i, Attributes.Attribute, Int, Int, Int, Int);
 
    procedure Vertex_Attrib4v is new Loader.Procedure_With_2_Params
-     ("glVertexAttrib4Iiv", Attributes.Attribute, Vector4);
+     (GL_Vertex_Attrib_4Iiv, Attributes.Attribute, Vector4);
 
 end GL.API.Ints;

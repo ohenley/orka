@@ -15,29 +15,20 @@
 with Ada.Unchecked_Conversion;
 
 package body GL.Runtime_Loading is
-   use type Function_Maps.Cursor;
 
-   procedure Load_Function_To_Map (Function_Name : String;
-                                   Position : out Function_Maps.Cursor) is
-      Inserted : Boolean;
-   begin
-      Loaded.Insert (Key      => Function_Name,
-                     New_Item => Raw_Subprogram_Reference (Function_Name),
-                     Position => Position,
-                     Inserted => Inserted);
-   end Load_Function_To_Map;
-   pragma Inline (Load_Function_To_Map);
+   function Load (ID : Reference_ID) return Function_Reference is
+      use type System.Address;
 
-   function Load (Function_Name : String) return Function_Reference is
       function As_Function_Reference is new Ada.Unchecked_Conversion
         (Source => System.Address, Target => Function_Reference);
 
-      Position : Function_Maps.Cursor := Loaded.Find (Function_Name);
+      Pointer : System.Address := Loaded (ID);
    begin
-      if Position = Function_Maps.No_Element then
-         Load_Function_To_Map (Function_Name, Position);
+      if Pointer = System.Null_Address then
+         Pointer := Raw_Subprogram_Reference (Function_Map (ID).all);
+         Loaded (ID) := Pointer;
       end if;
-      return As_Function_Reference (Function_Maps.Element (Position));
+      return As_Function_Reference (Pointer);
    end Load;
 
    function Function_Without_Params return Return_Type is
@@ -47,7 +38,7 @@ package body GL.Runtime_Loading is
 
       function Load_Function is new Load (Function_Reference);
 
-      Reference : constant Function_Reference := Load_Function (Function_Name);
+      Reference : constant Function_Reference := Load_Function (Function_ID);
    begin
       return Reference.all;
    end Function_Without_Params;
@@ -59,7 +50,7 @@ package body GL.Runtime_Loading is
 
       function Load_Function is new Load (Function_Reference);
 
-      Reference : constant Function_Reference := Load_Function (Function_Name);
+      Reference : constant Function_Reference := Load_Function (Function_ID);
    begin
       return Reference (Param1);
    end Function_With_1_Param;
@@ -73,7 +64,7 @@ package body GL.Runtime_Loading is
       pragma Convention (StdCall, Function_Reference);
 
       function Load_Function is new Load (Function_Reference);
-      Reference : constant Function_Reference := Load_Function (Function_Name);
+      Reference : constant Function_Reference := Load_Function (Function_ID);
    begin
       return Reference (Param1, Param2);
    end Function_With_2_Params;
@@ -88,7 +79,7 @@ package body GL.Runtime_Loading is
       pragma Convention (StdCall, Function_Reference);
 
       function Load_Function is new Load (Function_Reference);
-      Reference : constant Function_Reference := Load_Function (Function_Name);
+      Reference : constant Function_Reference := Load_Function (Function_ID);
    begin
       return Reference (Param1, Param2, Param3);
    end Function_With_3_Params;
@@ -106,7 +97,7 @@ package body GL.Runtime_Loading is
       pragma Convention (StdCall, Function_Reference);
 
       function Load_Function is new Load (Function_Reference);
-      Reference : constant Function_Reference := Load_Function (Function_Name);
+      Reference : constant Function_Reference := Load_Function (Function_ID);
    begin
       return Reference (Param1, Param2, Param3, Param4);
    end Function_With_4_Params;
@@ -124,7 +115,7 @@ package body GL.Runtime_Loading is
 
       function Load_Function is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Function (Procedure_Name);
+        := Load_Function (Procedure_ID);
 
       Actual_Size : Types.Size := 0;
 
@@ -160,7 +151,7 @@ package body GL.Runtime_Loading is
 
       function Load_Function is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Function (Procedure_Name);
+        := Load_Function (Procedure_ID);
 
       Actual_Size : Types.Size := 0;
 
@@ -181,7 +172,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference.all;
    end Procedure_Without_Params;
@@ -193,7 +184,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1);
    end Procedure_With_1_Param;
@@ -206,7 +197,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference 
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2);
    end Procedure_With_2_Params;
@@ -221,7 +212,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3);
    end Procedure_With_3_Params;
@@ -237,7 +228,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4);
    end Procedure_With_4_Params;
@@ -255,7 +246,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4, Param5);
    end Procedure_With_5_Params;
@@ -274,7 +265,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4, Param5, Param6);
    end Procedure_With_6_Params;
@@ -295,7 +286,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4, Param5, Param6, Param7);
    end Procedure_With_7_Params;
@@ -317,7 +308,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4,
                  Param5, Param6, Param7, Param8);
@@ -342,7 +333,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4, Param5, Param6, Param7,
                  Param8, Param9);
@@ -368,7 +359,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4, Param5, Param6, Param7,
                  Param8, Param9, Param10);
@@ -396,7 +387,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4, Param5, Param6, Param7,
                  Param8, Param9, Param10, Param11);
@@ -425,7 +416,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Param4, Param5, Param6, Param7,
                  Param8, Param9, Param10, Param11, Param12);
@@ -440,7 +431,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2);
    end Array_Proc_With_2_Params;
@@ -455,7 +446,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3);
    end Array_Proc_With_3_Params;
@@ -469,7 +460,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Value);
    end Getter_With_2_Params;
@@ -484,7 +475,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Value);
    end Getter_With_3_Params;
@@ -500,7 +491,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Value);
    end Getter_With_4_Params;
@@ -517,7 +508,7 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Buffer_Size, Length, Value);
    end String_Getter_With_4_Params;
@@ -539,9 +530,14 @@ package body GL.Runtime_Loading is
 
       function Load_Procedure is new Load (Procedure_Reference);
       Reference : constant Procedure_Reference
-        := Load_Procedure (Procedure_Name);
+        := Load_Procedure (Procedure_ID);
    begin
       Reference (Param1, Param2, Param3, Buffer_Size, Length, Value);
    end String_Getter_With_6_Params;
+
+   procedure Initialize is
+   begin
+      Loaded := (others => System.Null_Address);
+   end Initialize;
 
 end GL.Runtime_Loading;

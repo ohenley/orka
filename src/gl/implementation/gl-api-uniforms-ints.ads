@@ -18,27 +18,27 @@ package GL.API.Uniforms.Ints is
    use GL.Types.Ints;
 
    procedure Uniform1 is new Loader.Procedure_With_3_Params
-     ("glProgramUniform1i", UInt, Int, Int);
+     (GL_Program_Uniform_1i, UInt, Int, Int);
 
    procedure Uniform1v is new Loader.Procedure_With_4_Params
-     ("glProgramUniform1iv", UInt, Int, Size, Int_Array);
+     (GL_Program_Uniform_1iv, UInt, Int, Size, Int_Array);
 
    procedure Uniform2 is new Loader.Procedure_With_4_Params
-     ("glProgramUniform2i", UInt, Int, Int, Int);
+     (GL_Program_Uniform_2i, UInt, Int, Int, Int);
 
    procedure Uniform2v is new Loader.Procedure_With_4_Params
-     ("glProgramUniform2iv", UInt, Int, Size, Vector2_Array);
+     (GL_Program_Uniform_2iv, UInt, Int, Size, Vector2_Array);
 
    procedure Uniform3 is new Loader.Procedure_With_5_Params
-     ("glProgramUniform3i", UInt, Int, Int, Int, Int);
+     (GL_Program_Uniform_3i, UInt, Int, Int, Int, Int);
 
    procedure Uniform3v is new Loader.Procedure_With_4_Params
-     ("glProgramUniform3iv", UInt, Int, Size, Vector3_Array);
+     (GL_Program_Uniform_3iv, UInt, Int, Size, Vector3_Array);
 
    procedure Uniform4 is new Loader.Procedure_With_6_Params
-     ("glProgramUniform4i", UInt, Int, Int, Int, Int, Int);
+     (GL_Program_Uniform_4i, UInt, Int, Int, Int, Int, Int);
 
    procedure Uniform4v is new Loader.Procedure_With_4_Params
-     ("glProgramUniform4iv", UInt, Int, Size, Vector4_Array);
+     (GL_Program_Uniform_4iv, UInt, Int, Size, Vector4_Array);
 
 end GL.API.Uniforms.Ints;
