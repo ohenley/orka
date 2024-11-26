@@ -1,8 +1,8 @@
-with "orka_awt-x11";
+with "orka_awt-wayland";
 with "orka_awt";
 with "../config/orka_awt_config";
 
-project Example is
+project Example_Wayland is
 
    for Languages use ("Ada");
 
@@ -13,9 +13,9 @@ project Example is
 
    for Source_Dirs use ("src");
 
-   for Main use ("example.adb");
+   for Main use ("example_wayland.adb");
 
    package Compiler renames Orka_AWT.Compiler;
    package Binder renames Orka_AWT.Binder;
 
-end Example;
+end Example_Wayland;

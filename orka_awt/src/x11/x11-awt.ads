@@ -18,20 +18,18 @@ private with Ada.Unchecked_Conversion;
 
 with EGL;
 
-package X_11.AWT is
+package X11.AWT is
    pragma Preelaborate;
 
    ----------------------------------------------------------------------------
    --                          Internal Subprograms                          --
    ----------------------------------------------------------------------------
 
-   function Get_Display (Display : X_11.Display) return Standard.EGL.Native_Display_Ptr;
-   --  Used by function Create_Context in Orka.Contexts.EGL.AWT to create an
-   --  EGL context using the X11 platform
+   function Get_Display (Display : Standard.X11.Display) return Standard.EGL.Native_Display_Ptr;
 
 private
 
    function Convert is new Ada.Unchecked_Conversion
-     (Source => X_11.Display_Ptr, Target => Standard.EGL.Native_Display_Ptr);
+     (Source => Standard.X11.X_Display_Access, Target => Standard.EGL.Native_Display_Ptr);
 
-end X_11.AWT;
+end X11.AWT;

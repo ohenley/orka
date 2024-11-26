@@ -15,6 +15,7 @@
 --  limitations under the License.
 
 with EGL.Debug;
+with EGL.Objects.Displays;
 
 package body Orka.Contexts.EGL.X11 is
 
@@ -43,7 +44,7 @@ package body Orka.Contexts.EGL.X11 is
       Standard.EGL.Debug.Set_Message_Callback (Print_Error'Access);
 
       declare
-         Display : constant EGL_Displays.Display := EGL_Displays.Create_Display (Window);
+         Display : constant EGL_Displays.Display := EGL_Displays.Create_Display (Standard.EGL.Objects.Displays.x11);
       begin
          return Result : X11_EGL_Context do
             Result.Context := EGL_Contexts.Create_Context

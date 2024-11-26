@@ -15,7 +15,7 @@ with Orka.Resources.Locations.Directories;
 
 with Package_Test;
 
-procedure Example is
+procedure Example_Wayland is
    use Ada.Text_IO;
 
    Index : Positive := 1;
@@ -479,4 +479,4 @@ begin
          Put_Line ("Error in main task: " & Ada.Exceptions.Exception_Information (E));
          raise;
    end;
-end Example;
+end;

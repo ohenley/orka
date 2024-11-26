@@ -1,0 +1,29 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+      {
+         "name": "Debug Example X11",
+         "type": "cppdbg",
+         "request": "launch",
+         "program": "${workspaceFolder}/orka_awt/example/build/bin/example_x11",  // Path to your Ada executable
+         "args": [],                        // Command-line arguments (if any)
+         "stopAtEntry": false,              // Set to true if you want to stop at the program entry point
+         "cwd": "${workspaceFolder}",       // Current working directory
+         "environment": [],                 // Add environment variables if needed
+         "externalConsole": true,           // Use an external terminal for debugging
+         "MIMode": "gdb",                   // Use GDB as the debugger
+         "setupCommands": [
+            {
+               "description": "Enable Ada language support in GDB",
+               "text": "set language ada",
+               "ignoreFailures": false
+            },
+            {
+               "description": "Enable pretty-printing for GDB",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+            }
+         ]
+      }
+   ]
+}
