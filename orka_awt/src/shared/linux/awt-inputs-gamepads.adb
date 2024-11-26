@@ -27,11 +27,9 @@ with Orka.Strings;
 with Event_Device.Force_Feedbacks;
 with Inotify;
 
-with Wayland;
-
 with AWT.Inputs.Gamepads.Mappings;
 with AWT.OS;
-with AWT.Registry;
+-- with AWT.Registry;
 
 package body AWT.Inputs.Gamepads is
 
@@ -476,7 +474,7 @@ package body AWT.Inputs.Gamepads is
                               Object.Sensor_Device.Close;
                            else
                               Object.Set_Motion_Sensor_Modifiers;
-                              Object.IMU.Initialize;
+                              --Object.IMU.Initialize;
                               exit Find_Motion_Input_Event;
                            end if;
                         end if;
@@ -683,30 +681,31 @@ package body AWT.Inputs.Gamepads is
          State  : in out Motion_State;
          DT     : Duration)
       is
-         use type Orka.Float_64;
+         --  use type Orka.Float_64;
 
-         Velocity : constant Vectors.Direction :=
-            [Vectors.To_Radians (Orka.Float_64 (State.Axes (Rx))),
-             Vectors.To_Radians (Orka.Float_64 (State.Axes (Ry))),
-             Vectors.To_Radians (Orka.Float_64 (State.Axes (Rz))),
-             0.0];
-         Acceleration : constant Vectors.Vector4 :=
-            [-Orka.Float_64 (State.Axes (X)),
-             -Orka.Float_64 (State.Axes (Y)),
-              Orka.Float_64 (State.Axes (Z)),
-             0.0];
-         Calibrated : Boolean;
+         --  Velocity : constant Vectors.Direction :=
+         --     [Vectors.To_Radians (Orka.Float_64 (State.Axes (Rx))),
+         --      Vectors.To_Radians (Orka.Float_64 (State.Axes (Ry))),
+         --      Vectors.To_Radians (Orka.Float_64 (State.Axes (Rz))),
+         --      0.0];
+         --  Acceleration : constant Vectors.Vector4 :=
+         --     [-Orka.Float_64 (State.Axes (X)),
+         --      -Orka.Float_64 (State.Axes (Y)),
+         --       Orka.Float_64 (State.Axes (Z)),
+         --      0.0];
+         --  Calibrated : Boolean;
 
-         Motion_State : AWT.IMUs.Estimated_State;
+         --  Motion_State : AWT.IMUs.Estimated_State;
       begin
-         Object.IMU.Integrate (Velocity, Acceleration, DT, Motion_State, Calibrated);
+         null;
+         --  Object.IMU.Integrate (Velocity, Acceleration, DT, Motion_State, Calibrated);
 
-         State.Orientation      := Motion_State.Orientation;
-         State.Angular_Velocity := Motion_State.Angular_Velocity;
+         --  State.Orientation      := Motion_State.Orientation;
+         --  State.Angular_Velocity := Motion_State.Angular_Velocity;
 
-         if Calibrated then
-            Log (Debug, "Calibrated gyro bias of IMU of " & (+Object.ID));
-         end if;
+         --  if Calibrated then
+         --     Log (Debug, "Calibrated gyro bias of IMU of " & (+Object.ID));
+         --  end if;
       end Update_IMU_State;
 
       procedure Poll_State_Sensor (Object : in out Gamepad_Object; DT : Duration) is
@@ -1115,8 +1114,8 @@ package body AWT.Inputs.Gamepads is
    begin
       pragma Assert (for all Gamepad of All_Gamepads => not Gamepad.Initialized);
 
-      AWT.Registry.Gamepad_Notify_FD := Wayland.File_Descriptor (Input_Notifier.File_Descriptor);
-      AWT.Registry.Gamepad_Notify_Callback := Process_Events'Access;
+      -- AWT.Registry.Gamepad_Notify_FD := File_Descriptor (Input_Notifier.File_Descriptor);
+      -- AWT.Registry.Gamepad_Notify_Callback := Process_Events'Access;
 
       Input_Notifier.Add_Watch
         (Path => Input_Folder,

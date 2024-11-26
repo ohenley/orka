@@ -19,7 +19,7 @@ with EGL.Objects.Devices;
 package EGL.Objects.Displays is
    pragma Preelaborate;
 
-   type Platform_Kind is (Device, GBM, Wayland);
+   type Platform_Kind is (Device, GBM, Wayland, X11);
    --  The following extension is required for a specific platform:
    --
    --  Device:      EGL_EXT_platform_device
@@ -69,7 +69,8 @@ private
    for Platform_Kind use
      (Device      => 16#313F#,
       GBM         => 16#31D7#,
-      Wayland     => 16#31D8#);
+      Wayland     => 16#31D8#,
+      X11         => 16#31D9#);
    for Platform_Kind'Size use Enum'Size;
 
    type Display (Platform : Platform_Kind) is new EGL_Object with record

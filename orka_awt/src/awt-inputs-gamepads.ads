@@ -18,7 +18,7 @@ private with Ada.Characters.Latin_1;
 private with Ada.Finalization;
 
 private with AWT.Gamepads;
-private with AWT.IMUs;
+--private with AWT.IMUs;
 
 with Orka.Transforms.Doubles.Quaternions;
 with Orka.Transforms.Doubles.Vectors;
@@ -282,7 +282,7 @@ private
 
       Gamepad : Gamepad_State;
       Sensor  : Motion_State;
-      IMU     : AWT.IMUs.IMU;
+      --IMU     : AWT.IMUs.IMU;
 
       Axes : Axis_Mappings;
       Keys : Key_Mappings;

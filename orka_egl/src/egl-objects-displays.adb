@@ -97,7 +97,8 @@ package body EGL.Objects.Displays is
         (case Platform is
            when GBM             => "EGL_MESA_platform_gbm",
            when Displays.Device => "EGL_EXT_platform_device",
-           when Wayland         => "EGL_EXT_platform_wayland"));
+           when Wayland         => "EGL_EXT_platform_wayland",
+           when X11             => "EGL_KHR_platform_x11"));
 
       return Result : Display (Platform) do
          Result.Reference.ID :=
@@ -136,7 +137,7 @@ package body EGL.Objects.Displays is
 
       Native_Display : constant Void_Ptr :=
         (case Platform is
-           when GBM | Wayland   => Void_Ptr (System.Null_Address),
+           when GBM | Wayland | X11  => Void_Ptr (System.Null_Address),
            when Displays.Device => Convert (Get_First_Device.ID));
    begin
       return Create_Display (Platform, Native_Display, Devices.No_Device);

@@ -16,28 +16,31 @@
 
 with Ada.Streams;
 
-with Wayland;
-
 with AWT.Inputs;
 
-private with C_Binding;
+with Interfaces.C; use Interfaces.C;
+
+--private with C_Binding;
+with C_Binding;
 
 private package AWT.OS is
    pragma Preelaborate;
 
-   subtype Unsigned_32 is Standard.Wayland.Unsigned_32;
+   subtype Unsigned_32 is unsigned;
+
+   package CB renames C_Binding;
 
    function Code_To_Button (Code : Unsigned_32) return AWT.Inputs.Pointer_Button;
 
    function Code_To_Button (Code : Unsigned_32) return AWT.Inputs.Keyboard_Button;
 
    type Pipe is record
-      Read, Write : Standard.Wayland.File_Descriptor;
+      Read, Write : CB.File_Descriptor;
    end record;
 
    procedure Create_Pipe (Result : out Pipe);
 
-   type File (File_Descriptor : Standard.Wayland.File_Descriptor) is tagged limited private;
+   type File (FD : CB.File_Descriptor) is tagged limited private;
 
    function Read (Object : File) return Ada.Streams.Stream_Element_Array;
 
@@ -83,8 +86,8 @@ private package AWT.OS is
 
 private
 
-   type File (File_Descriptor : Standard.Wayland.File_Descriptor) is tagged limited record
-      Handle : C_Binding.File (File_Descriptor);
+   type File (FD : CB.File_Descriptor) is tagged limited record
+      Handle : C_Binding.File (FD);
    end record;
 
 end AWT.OS;

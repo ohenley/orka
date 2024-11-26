@@ -147,7 +147,7 @@ package body AWT.OS is
         when others => Key_Unknown);
 
    procedure Create_Pipe (Result : out Pipe) is
-      type File_Descriptor_Array is array (1 .. 2) of Standard.Wayland.File_Descriptor
+      type File_Descriptor_Array is array (1 .. 2) of CB.File_Descriptor
         with Convention => C;
 
       function C_Pipe
@@ -203,7 +203,7 @@ package body AWT.OS is
                   when Write      => C_Binding.Write_Only,
                   when Read_Write => C_Binding.Read_Write));
    begin
-      return (File_Descriptor => Result.File_Descriptor, Handle => Result);
+      return (FD => Result.FD, Handle => Result);
    end Open;
 
    procedure Close (Object : in out File) is

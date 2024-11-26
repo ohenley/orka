@@ -1,4 +1,4 @@
-with "orka_awt-linux";
+with "orka_awt-x11";
 with "orka_awt";
 with "../config/orka_awt_config";
 

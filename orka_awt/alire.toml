@@ -19,14 +19,14 @@ linux = true
 '...' = false
 
 [project-files.'case(os)']
-linux = ["orka_awt-linux.gpr", "example/example.gpr"]
+linux = ["orka_awt-x11.gpr", "example/example.gpr"]
 
 [[depends-on]]
 [depends-on.'case(os)'.linux]
-wayland_egl_ada = "~1.0.0"
-wayland_cursor_ada = "~1.0.0"
-wayland_protocols_ada = "~1.0.0"
-wayland_client_ada = "~1.0.0"
+#wayland_egl_ada = "~1.0.0"
+#wayland_cursor_ada = "~1.0.0"
+#wayland_protocols_ada = "~1.0.0"
+#wayland_client_ada = "~1.0.0"
 orka_egl = "~1.0.0"
 evdev = "^2.0.2"
 inotify = "^2.0.1"

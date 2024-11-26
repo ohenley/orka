@@ -20,7 +20,6 @@ package AWT.Drag_And_Drop is
 
    protected type Signal is
       procedure Set;
-
       entry Wait;
    private
       Signaled : Boolean := False;

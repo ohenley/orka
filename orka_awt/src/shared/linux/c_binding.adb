@@ -29,17 +29,17 @@ package body C_Binding is
    with Import, Convention => C, External_Name => "open";
 
    function C_Close
-     (File_Descriptor : Interfaces.C.int) return Interfaces.C.int
+     (FD : Interfaces.C.int) return Interfaces.C.int
    with Import, Convention => C, External_Name => "close";
 
    function C_Read
-     (File_Descriptor : Interfaces.C.int;
+     (FD : Interfaces.C.int;
       Buffer          : in out Ada.Streams.Stream_Element_Array;
       Count           : Size_Type) return SSize_Type
    with Import, Convention => C, External_Name => "read";
 
    function C_Write
-     (File_Descriptor : Interfaces.C.int;
+     (FD : Interfaces.C.int;
       Buffer          : Ada.Streams.Stream_Element_Array;
       Count           : Size_Type) return SSize_Type
    with Import, Convention => C, External_Name => "write";
@@ -50,12 +50,12 @@ package body C_Binding is
       Result : Interfaces.C.int;
    begin
       Result := C_Open (Path & L1.NUL, Flags);
-      return (File_Descriptor => Wayland.File_Descriptor (Result), Open => Result /= -1);
+      return (FD => File_Descriptor (Result), Open => Result /= -1);
    end Open;
 
    procedure Close (Object : in out File) is
       Result : constant Interfaces.C.int
-        := C_Close (Interfaces.C.int (Object.File_Descriptor));
+        := C_Close (Interfaces.C.int (Object.FD));
    begin
       if Result /= -1 then
          Object.Open := False;
@@ -68,7 +68,7 @@ package body C_Binding is
    is
       Count : constant SSize_Type
         := C_Write
-             (File_Descriptor => Interfaces.C.int (Object.File_Descriptor),
+             (FD => Interfaces.C.int (Object.FD),
               Buffer          => Bytes,
               Count           => Bytes'Length);
    begin
@@ -88,7 +88,7 @@ package body C_Binding is
       Bytes  : in out Ada.Streams.Stream_Element_Array) return Result
    is
       Count : constant SSize_Type
-        := C_Read (Interfaces.C.int (Object.File_Descriptor), Bytes, Bytes'Length);
+        := C_Read (Interfaces.C.int (Object.FD), Bytes, Bytes'Length);
    begin
       case Count is
          when SSize_Type'First .. -1 =>

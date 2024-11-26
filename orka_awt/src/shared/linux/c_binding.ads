@@ -18,12 +18,12 @@ private with Interfaces.C;
 
 with Ada.Streams;
 
-with Wayland;
-
 package C_Binding is
    pragma Preelaborate;
 
-   type File (File_Descriptor : Wayland.File_Descriptor) is private;
+   subtype File_Descriptor is Integer;
+
+   type File (FD : File_Descriptor) is private;
 
    type Result_Kind is (Success, EOF, Failure);
 
@@ -66,7 +66,7 @@ private
 
    use type Interfaces.C.int;
 
-   type File (File_Descriptor : Wayland.File_Descriptor) is record
+   type File (FD : File_Descriptor) is record
       Open : Boolean := True;
    end record;
 
