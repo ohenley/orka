@@ -15,11 +15,11 @@
 --  limitations under the License.
 
 private with AWT.Monitors;
-private with AWT.X11.Windows;
+private with AWT.Win.Windows;
 
 with AWT.Windows;
 
-package Orka.Contexts.EGL.X11.AWT is
+package Orka.Contexts.EGL.Win.AWT is
    pragma Preelaborate;
 
    type AWT_Context is limited new Surface_Context with private;
@@ -53,7 +53,7 @@ package Orka.Contexts.EGL.X11.AWT is
 
 private
 
-   type AWT_Context is limited new X11_EGL_Context and Surface_Context with null record;
+   type AWT_Context is limited new win_EGL_Context and Surface_Context with null record;
 
    overriding
    procedure Make_Current
@@ -61,7 +61,7 @@ private
       Window : in out Orka.Windows.Window'Class);
 
    type AWT_Window (Context : not null access AWT_Context) is
-     limited new Standard.AWT.X11.Windows.X11_Window and Orka.Windows.Window with
+     limited new Standard.AWT.Win.Windows.Win_Window and Orka.Windows.Window with
    record
       Resize : Boolean := False with Atomic;
    end record;
@@ -90,4 +90,4 @@ private
       Monitor  : Standard.AWT.Monitors.Monitor'Class;
       Presence : Standard.AWT.Windows.Monitor_Presence);
 
-end Orka.Contexts.EGL.X11.AWT;
+end Orka.Contexts.EGL.Win.AWT;

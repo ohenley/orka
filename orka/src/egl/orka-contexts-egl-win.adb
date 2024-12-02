@@ -17,14 +17,14 @@
 with EGL.Debug;
 with EGL.Objects.Displays;
 
-package body Orka.Contexts.EGL.X11 is
+package body Orka.Contexts.EGL.Win is
 
    overriding
    function Create_Context
      (Version : Context_Version;
-      Flags   : Context_Flags := (others => False)) return X11_EGL_Context is
+      Flags   : Context_Flags := (others => False)) return Win_EGL_Context is
    begin
-      return Result : constant X11_EGL_Context :=
+      return Result : constant Win_EGL_Context :=
         (Ada.Finalization.Limited_Controlled with others => <>)
       do
          --  EGL context for X11 platform requires a pointer to a native
@@ -36,7 +36,7 @@ package body Orka.Contexts.EGL.X11 is
    function Create_Context
      (Window  : Standard.EGL.Native_Display_Ptr;
       Version : Context_Version;
-      Flags   : Context_Flags := (others => False)) return X11_EGL_Context
+      Flags   : Context_Flags := (others => False)) return Win_EGL_Context
    is
       package EGL_Contexts renames Standard.EGL.Objects.Contexts;
       package EGL_Displays renames Standard.EGL.Objects.Displays;
@@ -44,9 +44,9 @@ package body Orka.Contexts.EGL.X11 is
       Standard.EGL.Debug.Set_Message_Callback (Print_Error'Access);
 
       declare
-         Display : constant EGL_Displays.Display := EGL_Displays.Create_Display (Standard.EGL.Objects.Displays.x11);
+         Display : constant EGL_Displays.Display := EGL_Displays.Create_Display (Standard.EGL.Objects.Displays.Win);
       begin
-         return Result : X11_EGL_Context do
+         return Result : Win_EGL_Context do
             Result.Context := EGL_Contexts.Create_Context
               (Display,
                (Major => Version.Major,
@@ -64,15 +64,15 @@ package body Orka.Contexts.EGL.X11 is
    end Create_Context;
 
    overriding
-   procedure Make_Current (Object : X11_EGL_Context) is
+   procedure Make_Current (Object : Win_EGL_Context) is
    begin
       Object.Context.Make_Current;
    end Make_Current;
 
    overriding
-   procedure Make_Not_Current (Object : X11_EGL_Context) is
+   procedure Make_Not_Current (Object : Win_EGL_Context) is
    begin
       Object.Context.Make_Not_Current;
    end Make_Not_Current;
 
-end Orka.Contexts.EGL.X11;
+end Orka.Contexts.EGL.Win;

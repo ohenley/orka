@@ -2,7 +2,7 @@ with System;
 with Interfaces.C;
 with Interfaces.C.Strings;
 
-package X11 is
+package Win is
    pragma Preelaborate;
    pragma Linker_Options ("-lX11");
    --pragma Linker_Options ("-lXext");
@@ -104,4 +104,4 @@ package X11 is
       return X_Graphic_Context_Access
    with Import => True, Convention => C, External_Name => "XDefaultGC";
 
-end X11;
+end Win;

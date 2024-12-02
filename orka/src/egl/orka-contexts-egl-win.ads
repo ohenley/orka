@@ -14,15 +14,15 @@
 --  See the License for the specific language governing permissions and
 --  limitations under the License.
 
-package Orka.Contexts.EGL.X11 is
+package Orka.Contexts.EGL.Win is
    pragma Preelaborate;
 
-   type X11_EGL_Context is limited new Context with private;
+   type Win_EGL_Context is limited new Context with private;
 
    overriding
    function Create_Context
      (Version : Context_Version;
-      Flags   : Context_Flags := (others => False)) return X11_EGL_Context;
+      Flags   : Context_Flags := (others => False)) return Win_EGL_Context;
    --  Raise Program_Error due to the missing native X11 display
    --
    --  This function must be overriden and internally call the function below.
@@ -30,26 +30,26 @@ package Orka.Contexts.EGL.X11 is
    function Create_Context
      (Window  : Standard.EGL.Native_Display_Ptr;
       Version : Context_Version;
-      Flags   : Context_Flags := (others => False)) return X11_EGL_Context;
+      Flags   : Context_Flags := (others => False)) return Win_EGL_Context;
    --  Return a X11 EGL context
 
 private
 
-   type X11_EGL_Context is limited new EGL_Context with record
-      Context : Standard.EGL.Objects.Contexts.Context (Standard.EGL.Objects.Displays.X11);
+   type Win_EGL_Context is limited new EGL_Context with record
+      Context : Standard.EGL.Objects.Contexts.Context (Standard.EGL.Objects.Displays.Win);
    end record;
 
    overriding
-   function Is_Current (Object : X11_EGL_Context; Kind : Task_Kind) return Boolean is
+   function Is_Current (Object : Win_EGL_Context; Kind : Task_Kind) return Boolean is
      (Object.Context.Is_Current
         (case Kind is
            when Current_Task => Standard.EGL.Objects.Contexts.Current_Task,
            when Any_Task     => Standard.EGL.Objects.Contexts.Any_Task));
 
    overriding
-   procedure Make_Current (Object : X11_EGL_Context);
+   procedure Make_Current (Object : Win_EGL_Context);
 
    overriding
-   procedure Make_Not_Current (Object : X11_EGL_Context);
+   procedure Make_Not_Current (Object : Win_EGL_Context);
 
-end Orka.Contexts.EGL.X11;
+end Orka.Contexts.EGL.Win;

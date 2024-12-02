@@ -14,6 +14,22 @@
 --  See the License for the specific language governing permissions and
 --  limitations under the License.
 
-with Orka.Contexts.EGL.X11.AWT;
+private with Ada.Unchecked_Conversion;
 
-package Orka.Contexts.AWT renames Orka.Contexts.EGL.X11.AWT;
+with EGL;
+
+package Win.AWT is
+   pragma Preelaborate;
+
+   ----------------------------------------------------------------------------
+   --                          Internal Subprograms                          --
+   ----------------------------------------------------------------------------
+
+   function Get_Display (Display : Standard.Win.Display) return Standard.EGL.Native_Display_Ptr;
+
+private
+
+   function Convert is new Ada.Unchecked_Conversion
+     (Source => Standard.Win.X_Display_Access, Target => Standard.EGL.Native_Display_Ptr);
+
+end Win.AWT;

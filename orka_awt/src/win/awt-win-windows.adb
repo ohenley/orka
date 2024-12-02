@@ -29,10 +29,10 @@ with AWT.Inputs;
 with AWT.Monitors;
 with AWT.Windows;
 
-package body AWT.X11.Windows is
+package body AWT.Win.Windows is
 
    procedure Make_Current
-     (Object  : in out X11_Window;
+     (Object  : in out Win_Window;
       Context : Standard.EGL.Objects.Contexts.Context) is
    begin
       null;
@@ -40,7 +40,7 @@ package body AWT.X11.Windows is
 
    overriding
    procedure Create_Window
-     (Object                        : aliased in out X11_Window;
+     (Object                        : aliased in out Win_Window;
       ID, Title                     : String;
       Width, Height                 : Positive;
       Visible, Resizable, Decorated : Boolean := True;
@@ -50,46 +50,46 @@ package body AWT.X11.Windows is
    end Create_Window;
 
    overriding
-   procedure Finalize (Object : in out X11_Window) is
+   procedure Finalize (Object : in out Win_Window) is
    begin
       null;
    end Finalize;
 
    overriding
-   procedure Set_Application_ID (Object : in out X11_Window; ID : String) is
+   procedure Set_Application_ID (Object : in out Win_Window; ID : String) is
    begin
       null;
    end Set_Application_ID;
 
    overriding
-   procedure Set_Title (Object : in out X11_Window; Title : String) is
+   procedure Set_Title (Object : in out Win_Window; Title : String) is
    begin
       null;
    end Set_Title;
 
    overriding
-   procedure Set_Size (Object : in out X11_Window; Width, Height : Positive) is
+   procedure Set_Size (Object : in out Win_Window; Width, Height : Positive) is
    begin
       null;
    end Set_Size;
 
    overriding
    procedure Set_Size_Limits
-     (Object : in out X11_Window;
+     (Object : in out Win_Window;
       Min_Width, Min_Height, Max_Width, Max_Height : Natural) is
    begin
       null;
    end Set_Size_Limits;
 
    overriding
-   procedure Set_Size_Mode (Object : in out X11_Window; Mode : AWT.Windows.Size_Mode) is
+   procedure Set_Size_Mode (Object : in out Win_Window; Mode : AWT.Windows.Size_Mode) is
    begin
       null;
    end Set_Size_Mode;
 
    overriding
    procedure Set_Size_Mode
-     (Object  : in out X11_Window;
+     (Object  : in out Win_Window;
       Mode    : AWT.Windows.Size_Mode;
       Monitor : AWT.Monitors.Monitor'Class) is
    begin
@@ -97,34 +97,34 @@ package body AWT.X11.Windows is
    end Set_Size_Mode;
 
    overriding
-   procedure Set_Framebuffer_Scale (Object : in out X11_Window; Scale : Positive) is
+   procedure Set_Framebuffer_Scale (Object : in out Win_Window; Scale : Positive) is
    begin
       null;
    end Set_Framebuffer_Scale;
 
    overriding
-   procedure Set_Raw_Pointer_Motion (Object : in out X11_Window; Enable : Boolean) is
+   procedure Set_Raw_Pointer_Motion (Object : in out Win_Window; Enable : Boolean) is
    begin
       null;
    end Set_Raw_Pointer_Motion;
 
    overriding
    procedure Set_Margin
-     (Object : in out X11_Window;
+     (Object : in out Win_Window;
       Margin : Natural) is
    begin
       null;
    end Set_Margin;
 
    overriding
-   procedure Set_Visible (Object : in out X11_Window; Visible : Boolean) is
+   procedure Set_Visible (Object : in out Win_Window; Visible : Boolean) is
    begin
       null;
    end Set_Visible;
 
    overriding
    procedure Set_Pointer_Cursor
-     (Object : in out X11_Window;
+     (Object : in out Win_Window;
       Cursor : AWT.Inputs.Cursors.Pointer_Cursor) is
    begin
       null;
@@ -132,63 +132,63 @@ package body AWT.X11.Windows is
 
    overriding
    procedure Set_Pointer_Mode
-     (Object : in out X11_Window;
+     (Object : in out Win_Window;
       Mode   : AWT.Inputs.Pointer_Mode) is
    begin
       null;
    end Set_Pointer_Mode;
 
    overriding
-   function Raw_Pointer_Motion (Object : X11_Window) return Boolean is
+   function Raw_Pointer_Motion (Object : Win_Window) return Boolean is
    begin
       return False;
    end Raw_Pointer_Motion;
 
    overriding
-   function State (Object : X11_Window) return AWT.Windows.Window_State is 
+   function State (Object : Win_Window) return AWT.Windows.Window_State is 
       (others => <>);
 
    overriding
-   function State (Object : X11_Window) return AWT.Windows.Framebuffer_State is
+   function State (Object : Win_Window) return AWT.Windows.Framebuffer_State is
       (others => <>);
 
    overriding
-   function State (Object : in out X11_Window) return AWT.Inputs.Pointer_State is
+   function State (Object : in out Win_Window) return AWT.Inputs.Pointer_State is
       (others => <>);
 
    overriding
-   function State (Object : in out X11_Window) return AWT.Inputs.Keyboard_State is
+   function State (Object : in out Win_Window) return AWT.Inputs.Keyboard_State is
       (others => <>);
 
    overriding
-   procedure Close (Object : in out X11_Window) is
+   procedure Close (Object : in out Win_Window) is
    begin
       null;
    end Close;
 
    overriding
-   function Should_Close (Object : X11_Window) return Boolean is
+   function Should_Close (Object : Win_Window) return Boolean is
    begin
       return False;
    end Should_Close;
 
    overriding
-   procedure Swap_Buffers (Object : in out X11_Window) is
+   procedure Swap_Buffers (Object : in out Win_Window) is
    begin
       null;
    end Swap_Buffers;
 
    overriding
-   procedure Set_Vertical_Sync (Object : in out X11_Window; Enable : Boolean) is
+   procedure Set_Vertical_Sync (Object : in out Win_Window; Enable : Boolean) is
    begin
       null;
    end Set_Vertical_Sync;
 
    overriding
-   function On_Close (Object : X11_Window) return Boolean is
+   function On_Close (Object : Win_Window) return Boolean is
    begin
       return False;
    end On_Close;
 
 
-end AWT.X11.Windows;
+end AWT.Win.Windows;

@@ -21,7 +21,7 @@ linux = true
 [project-files.'case(os)']
 linux = [
          #"example/example_wayland.gpr", 
-         "example/example_x11.gpr"]
+         "example/example_win.gpr"]
 
 [[depends-on]]
 [depends-on.'case(os)'.linux]

@@ -14,13 +14,13 @@
 --  See the License for the specific language governing permissions and
 --  limitations under the License.
 
-with X11;
+with Win;
 
-package AWT.X11 is
+package AWT.Win is
    pragma Preelaborate;
 
    
-    function Get_Display return not null access Standard.X11.Display;
+    function Get_Display return not null access Standard.Win.Display;
    --  Used by function Create_Context in Orka.Contexts.EGL.AWT to create an
    --  EGL context using the Wayland platform
-end AWT.X11;
+end AWT.Win;

@@ -14,12 +14,12 @@
 --  See the License for the specific language governing permissions and
 --  limitations under the License.
 
-with X11.AWT;
-with AWT.X11;
+with Win.AWT;
+with AWT.Win;
 with EGL;
 with EGL.Objects.Configs;
 
-package body Orka.Contexts.EGL.X11.AWT is
+package body Orka.Contexts.EGL.Win.AWT is
 
    overriding
    function Create_Context
@@ -31,8 +31,8 @@ package body Orka.Contexts.EGL.X11.AWT is
       end if;
 
       declare
-         D : Standard.X11.Display := Standard.AWT.X11.Get_Display.all;
-         ND : Standard.EGL.Native_Display_Ptr := Standard.X11.AWT.Get_Display (D);
+         D : Standard.Win.Display := Standard.AWT.Win.Get_Display.all;
+         ND : Standard.EGL.Native_Display_Ptr := Standard.Win.AWT.Get_Display (D);
       begin
          return Create_Context (ND, Version, Flags);
       end;
@@ -150,4 +150,4 @@ package body Orka.Contexts.EGL.X11.AWT is
       null;
    end On_Move;
    
-end Orka.Contexts.EGL.X11.AWT;
+end Orka.Contexts.EGL.Win.AWT;
