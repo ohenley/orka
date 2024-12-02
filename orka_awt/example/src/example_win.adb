@@ -5,7 +5,7 @@ with AWT;
 with Orka.Contexts;
 with Orka.Contexts.AWT;
 
-procedure Example_X11 is
+procedure Example_Win is
 begin
    Put_Line ("Initializing...");
    AWT.Initialize;
@@ -19,4 +19,4 @@ begin
    begin
       null;
    end;
-end;
+end Example_Win;

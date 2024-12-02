@@ -1,8 +1,8 @@
-with "orka_awt-x11";
+with "orka_awt-win";
 with "orka_awt";
 with "../config/orka_awt_config";
 
-project Example_X11 is
+project Example_Win is
 
    for Languages use ("Ada");
 
@@ -13,9 +13,9 @@ project Example_X11 is
 
    for Source_Dirs use ("src");
 
-   for Main use ("example_x11.adb");
+   for Main use ("example_win.adb");
 
    package Compiler renames Orka_AWT.Compiler;
    package Binder renames Orka_AWT.Binder;
 
-end Example_X11;
+end Example_Win;

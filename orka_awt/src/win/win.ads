@@ -17,7 +17,7 @@ package Win is
    type X_Window is new IC.Unsigned_Long;
 
    type Display is record
-      Proxy : Standard.X11.X_Display_Access;
+      Proxy : X_Display_Access;
    end record;
 
    type X_Expose_Event is record
